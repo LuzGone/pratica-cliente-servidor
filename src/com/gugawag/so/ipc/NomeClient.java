@@ -11,7 +11,7 @@ package com.gugawag.so.ipc;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.Date;
+import java.util.Scanner;
 
 public class NomeClient {
 	public static void main(String[] args)  {
@@ -29,6 +29,12 @@ public class NomeClient {
 			PrintWriter pout = new PrintWriter(servidorSock.getOutputStream(), true);
 			// TODO Altere abaixo para enviar seu nome ao servidor
 			pout.println("Olá Servidor meu nome é LUIZ GONZAGA DE LIMA NETO.");
+			
+			Scanner scanner = new Scanner(System.in);
+			String mensagem = scanner.nextLine();
+
+			pout.println("Luiz Gonzaga de Lima Neto - " + mensagem);
+				
 			servidorSock.close();
 		}
 		catch (IOException ioe) {
