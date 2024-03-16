@@ -16,24 +16,29 @@ import java.util.Date;
 public class DateServer{
 	public static void main(String[] args)  {
 		try {
-			ServerSocket sock = new ServerSocket(6013);
+			ServerSocket sock = new ServerSocket(6013); //Cria um novo ServerSocket que escuta na porta 6013
 
-			System.out.println("=== Servidor iniciado ===\n");
+			System.out.println("======= Servidor iniciado =======\n");
+			System.out.println("=== LUIZ GONZAGA DE LIMA NETO ===\n");
 			// escutando por conexões
 			while (true) {
-				Socket client = sock.accept();
+				Socket client = sock.accept(); //Espera por uma conexão com o socket e a aceita
 				// Se chegou aqui, foi porque algum cliente se comunicou
 				System.out.println("Servidor recebeu comunicação do ip: " + client.getInetAddress() + "-" + client.getPort());
-				PrintWriter pout = new PrintWriter(client.getOutputStream(), true);
+				PrintWriter pout = new PrintWriter(client.getOutputStream(), true); //Cria um novo PrintWriter que converte os caracteres em bytes para o output stream do socket do cliente
 
 				// Escreve a data atual no socket
-				pout.println(new Date().toString() + "-Boa noite alunos!");
+				pout.println(new Date().toString() + "-Bom dia Cliente!");
 
 				InputStream in = client.getInputStream();
 				BufferedReader bin = new BufferedReader(new InputStreamReader(in));
 
 				String line = bin.readLine();
-				System.out.println("O cliente me disse:" + line);
+				System.out.println("\nO cliente me disse:\n" + line);
+
+				while ((line = bin.readLine()) != null) {
+					System.out.println("Received from client: " + line);
+				}
 
 				// fechar o socket e volta no loop para escutar novas conexões
 				client.close();
